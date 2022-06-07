@@ -1,0 +1,28 @@
+{
+  "robots": [
+    {
+      "id": 1,
+      "name": "Robot 1",
+      "configuration": {
+        "hasSentience": true,
+        "hasWheels": true,
+        "hasTracks": true,
+        "numberOfRotos": 5,
+        "Colour": "red"
+      },
+      "statues": ["on fire"]
+    },
+    {
+      "id": 2,
+      "name": "Robot 2",
+      "configuration": {
+        "hasSentience": true,
+        "hasWheels": true,
+        "hasTracks": true,
+        "numberOfRotos": 5,
+        "Colour": "red"
+      },
+      "statues": ["on fire"]
+    }
+  ]
+}

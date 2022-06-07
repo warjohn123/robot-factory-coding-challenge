@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Router, Route, BrowserRouter, Routes } from "react-router-dom";
+import { RobotsList } from "pages/robots-list";
+import Axios from "axios";
+
+Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+
+Axios.defaults.headers.common = {
+  "Content-Type": "application/json",
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<RobotsList />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

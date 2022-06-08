@@ -4,10 +4,10 @@
       "id": 1,
       "name": "Robot 1",
       "configuration": {
-        "hasSentience": true,
-        "hasWheels": true,
+        "hasSentience": false,
+        "hasWheels": false,
         "hasTracks": true,
-        "numberOfRotos": 5,
+        "numberOfRotors": 5,
         "Colour": "red"
       },
       "statuses": ["on fire"]
@@ -19,7 +19,7 @@
         "hasSentience": true,
         "hasWheels": true,
         "hasTracks": true,
-        "numberOfRotos": 5,
+        "numberOfRotors": 10,
         "Colour": "red"
       },
       "statuses": ["on fire", "rusty", "loose screws"]

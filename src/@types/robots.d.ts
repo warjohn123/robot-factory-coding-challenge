@@ -9,6 +9,6 @@ interface RobotConfiguration {
   hasSentience: boolean;
   hasWheels: boolean;
   hasTracks: boolean;
-  numberOfRotors: BigInteger;
+  numberOfRotors: number;
   Colour: string;
 }

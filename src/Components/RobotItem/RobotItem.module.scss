@@ -9,9 +9,24 @@
             margin: 0;
         }
 
-        svg {
-            cursor: pointer;
-            color: red;
+        .ActionIcons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            svg {
+                cursor: pointer;
+            }
+
+            .ExtinguishIcon {
+                color: red;
+                margin-right: 4px;
+            }
+
+            .RecycleIcon {
+                color: green;
+                margin-left: 4px;
+            }
         }
     }
 

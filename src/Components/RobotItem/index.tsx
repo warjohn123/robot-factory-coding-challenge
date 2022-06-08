@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import styles from "./RobotItem.module.scss";
-import { FaFireExtinguisher } from "react-icons/fa";
+import { FaFireExtinguisher, FaRecycle } from "react-icons/fa";
 import { RobotStatusEnum } from "enums/robots";
 import { useAppDispatch } from "hooks";
 import { extinguishRobot, fetchRobotsForQA } from "store/robot";
+import { isRecyclable, isOnFire } from "pages/quality-assurance/helpers";
 
 interface RobotItemProps {
   robot: Robot;
@@ -26,20 +27,42 @@ export function RobotItem({ robot }: RobotItemProps) {
     dispatch(fetchRobotsForQA());
   };
 
+  const recycle = () => {};
+
   const getRobotYesNoValue = (property: boolean) => {
     return property ? "Yes" : "No";
   };
 
   const handleExtinguish = () => {
-    const isOnFire = robot.statuses.indexOf(RobotStatusEnum.ON_FIRE) !== -1;
-    return isOnFire ? <FaFireExtinguisher onClick={extinguish} /> : null;
+    const { statuses } = robot;
+    return isOnFire(statuses.includes(RobotStatusEnum.ON_FIRE)) ? (
+      <FaFireExtinguisher
+        title="Extinguish"
+        className={styles.ExtinguishIcon}
+        onClick={extinguish}
+      />
+    ) : null;
+  };
+
+  const handleRecycle = () => {
+    return isRecyclable(robot) ? (
+      <FaRecycle
+        title="Recycle"
+        className={styles.RecycleIcon}
+        onClick={recycle}
+      />
+    ) : null;
   };
 
   return (
     <Card className={`${styles.RobotItem}`}>
       <Card.Header className={styles.RobotItemCardHeader}>
         <p>{robot.name}</p>
-        {handleExtinguish()}
+
+        <div className={styles.ActionIcons}>
+          {handleExtinguish()}
+          {handleRecycle()}
+        </div>
       </Card.Header>
       <Card.Body className={styles.RobotItemCardBody}>
         <p>

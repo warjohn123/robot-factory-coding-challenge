@@ -1,13 +1,9 @@
 import { useAppSelector } from "hooks";
-import React, { useEffect } from "react";
+import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "store";
-import { fetchRobotsForQA } from "store/robot";
 import { RobotsList } from "Components/RobotsList";
 
 export function Shipping() {
-  const dispatch = useDispatch<AppDispatch>();
   const factorySecondRobots = useAppSelector(
     (state) => state.robots.factorySecondsRobots
   );
@@ -16,10 +12,6 @@ export function Shipping() {
     (state) => state.robots.addedToShipmentRobots
   );
   const isLoading = useAppSelector((state) => state.robots.isLoading);
-
-  useEffect(() => {
-    dispatch(fetchRobotsForQA());
-  }, [dispatch]);
 
   if (isLoading) {
     return <div>Loading...</div>;

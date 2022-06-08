@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
-import { fetchRobotsForQA, recycleRobot } from "store/robot";
+import { recycleRobot } from "store/robot";
 import styles from "./quality-assurance.module.scss";
 import { isRecyclable } from "pages/quality-assurance/helpers";
 import { RobotsList } from "Components/RobotsList";
@@ -21,10 +21,6 @@ export function QualityAssurance() {
     );
     dispatch(recycleRobot(recyclableRobots));
   };
-
-  useEffect(() => {
-    dispatch(fetchRobotsForQA());
-  }, [dispatch]);
 
   useEffect(() => {
     if (!isLoading && allRobots.length) {

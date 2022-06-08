@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Header } from "Components/Header";
 import { QualityAssurance } from "pages/quality-assurance";
 import { Shipping } from "pages/shipping";
 import { Container } from "react-bootstrap";
 import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "store";
+import { fetchRobotsForQA } from "store/robot";
 
 export function RobotFactoryRoutes() {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchRobotsForQA());
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <Header />

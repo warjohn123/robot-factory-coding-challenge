@@ -12,7 +12,7 @@ export class RobotAPI {
   }
 
   extinguishRobot(robot: Robot): Promise<Robot> {
-    return Axios.put(API_ROUTES.extinguish(robot.id), {
+    return Axios.post(API_ROUTES.extinguish(robot.id), {
       ...robot,
       statuses: robot.statuses.filter(
         (status) => status !== RobotStatusEnum.ON_FIRE
@@ -27,7 +27,7 @@ export class RobotAPI {
   }
 
   sendShipment(robots: Robot[]): Promise<number[]> {
-    return Axios.post(API_ROUTES.sendShipment, {
+    return Axios.put(API_ROUTES.sendShipment, {
       shipmentRobots: robots.map((robot) => robot.id),
     }).then((response) => response.data as number[]);
   }

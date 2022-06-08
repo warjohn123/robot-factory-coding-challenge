@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
-import { recycleRobot } from "store/robot";
+import { fetchRobotsForQA, recycleRobot } from "store/robot";
 import styles from "./quality-assurance.module.scss";
 import { isRecyclable } from "pages/quality-assurance/helpers";
 import { RobotsList } from "Components/RobotsList";
+import { LIMIT } from "constants/index";
 
 export function QualityAssurance() {
   const dispatch = useDispatch<AppDispatch>();
@@ -15,11 +16,12 @@ export function QualityAssurance() {
   const allRobots = useAppSelector((state) => state.robots.allRobots);
   const isLoading = useAppSelector((state) => state.robots.isLoading);
 
-  const recycleRobots = () => {
-    let recyclableRobots: Robot[] = allRobots.filter((robot) =>
+  const recycleRobots = async () => {
+    const recyclableRobots: Robot[] = allRobots.filter((robot) =>
       isRecyclable(robot)
     );
-    dispatch(recycleRobot(recyclableRobots));
+    await dispatch(recycleRobot(recyclableRobots));
+    await dispatch(fetchRobotsForQA(LIMIT));
   };
 
   useEffect(() => {
@@ -30,10 +32,6 @@ export function QualityAssurance() {
       });
     }
   }, [isLoading, allRobots]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <>

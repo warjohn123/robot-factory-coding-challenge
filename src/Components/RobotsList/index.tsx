@@ -1,4 +1,5 @@
 import { RobotItem } from "Components/RobotItem";
+import { useAppSelector } from "hooks";
 import React from "react";
 
 interface RobotsListProps {
@@ -6,6 +7,9 @@ interface RobotsListProps {
 }
 
 export function RobotsList({ robots }: RobotsListProps) {
+  const isLoading = useAppSelector((state) => state.robots.isLoading);
+
+  if (isLoading) return <div>Loading...</div>;
   return (
     <>
       {robots.length ? (

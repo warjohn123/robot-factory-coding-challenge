@@ -11,7 +11,7 @@ interface RobotState {
 }
 
 const initialState: RobotState = {
-  isLoading: false,
+  isLoading: true,
   allRobots: [],
   factorySecondsRobots: [],
   passedQARobots: [],
@@ -44,6 +44,7 @@ export const sendShipment = createAsyncThunk(
   "robots-send-shipment",
   async (robots: Robot[]) => {
     await new RobotAPI().sendShipment(robots);
+    return robots.map((robot) => robot.id);
   }
 );
 
@@ -114,6 +115,18 @@ export const robotSlice = createSlice({
       })
       .addCase(extinguishRobot.fulfilled, (state) => {
         state.isLoading = false;
+      })
+      .addCase(sendShipment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(sendShipment.fulfilled, (state, action: { payload: any }) => {
+        state.isLoading = false;
+        const { payload } = action;
+        const shipmentRobots: number[] = payload as number[];
+
+        state.addedToShipmentRobots = state.addedToShipmentRobots.filter(
+          (robot: Robot) => !shipmentRobots.includes(robot.id)
+        );
       });
   },
 });

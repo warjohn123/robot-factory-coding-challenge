@@ -1,13 +1,14 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 import styles from "./RobotItem.module.scss";
-import { FaFireExtinguisher, FaRecycle, FaCheck } from "react-icons/fa";
+import { FaFireExtinguisher, FaRecycle } from "react-icons/fa";
 import { RobotStatusEnum } from "enums/robots";
 import { useAppDispatch, useAppSelector } from "hooks";
 import {
   extinguishRobot,
   fetchRobotsForQA,
   pushAddedToShipmentRobots,
+  recycleRobot,
   removeFromShipmentRobots,
   sendShipment,
 } from "store/robot";
@@ -39,12 +40,15 @@ export function RobotItem({ robot }: RobotItemProps) {
     return robotStatus;
   };
 
-  const extinguish = () => {
-    dispatch(extinguishRobot(robot));
-    dispatch(fetchRobotsForQA(LIMIT));
+  const extinguish = async () => {
+    await dispatch(extinguishRobot(robot));
+    await dispatch(fetchRobotsForQA(LIMIT));
   };
 
-  const recycle = () => {};
+  const recycle = async () => {
+    await dispatch(recycleRobot([robot]));
+    await dispatch(fetchRobotsForQA(LIMIT));
+  };
 
   const addToShipment = () => {
     dispatch(pushAddedToShipmentRobots(robot));

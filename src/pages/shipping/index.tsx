@@ -11,11 +11,6 @@ export function Shipping() {
   const addedToShipmentRobots = useAppSelector(
     (state) => state.robots.addedToShipmentRobots
   );
-  const isLoading = useAppSelector((state) => state.robots.isLoading);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <>

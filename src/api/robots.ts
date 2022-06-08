@@ -13,7 +13,7 @@ export class RobotAPI {
     return Axios.put(API_ROUTES.extinguish(robot.id), {
       ...robot,
       statuses: robot.statuses.filter(
-        (status) => status != RobotStatusEnum.ON_FIRE
+        (status) => status !== RobotStatusEnum.ON_FIRE
       ),
     }).then((response) => response.data as Robot);
   }

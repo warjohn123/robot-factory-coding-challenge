@@ -1,4 +1,4 @@
-import { RobotStatusEnum } from "enums/robots";
+import { RobotStatus, RobotStatusEnum } from "enums/robots";
 
 const hasFewerThanThreeOrGreaterThanEightRotors = (numberOfRotors: number) => {
   return numberOfRotors < 3 || numberOfRotors > 8;
@@ -21,6 +21,14 @@ const isSentientAndHasScrewsLoose = (
   hasScrewsLoose: boolean
 ) => {
   return hasSentience && hasScrewsLoose;
+};
+
+export const isFactorySecond = (statuses: RobotStatus[]) => {
+  return (
+    statuses.includes(RobotStatusEnum.RUSTY) ||
+    statuses.includes(RobotStatusEnum.LOOSE_SCREWS) ||
+    statuses.includes(RobotStatusEnum.PAINT_SCRATCHED)
+  );
 };
 
 export const isOnFire = (isOnFire: boolean) => {

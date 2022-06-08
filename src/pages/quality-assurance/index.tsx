@@ -1,5 +1,4 @@
 import { useAppSelector } from "hooks";
-import { RobotItem } from "Components/RobotItem";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
@@ -7,16 +6,17 @@ import { AppDispatch } from "store";
 import { fetchRobotsForQA, recycleRobot } from "store/robot";
 import styles from "./quality-assurance.module.scss";
 import { isRecyclable } from "pages/quality-assurance/helpers";
+import { RobotsList } from "Components/RobotsList";
 
 export function QualityAssurance() {
   const dispatch = useDispatch<AppDispatch>();
   const [showRecycleButton, setShowRecycleButton] = useState<boolean>(false);
 
-  const robots = useAppSelector((state) => state.robots.robots);
+  const allRobots = useAppSelector((state) => state.robots.allRobots);
   const isLoading = useAppSelector((state) => state.robots.isLoading);
 
   const recycleRobots = () => {
-    let recyclableRobots: Robot[] = robots.filter((robot) =>
+    let recyclableRobots: Robot[] = allRobots.filter((robot) =>
       isRecyclable(robot)
     );
     dispatch(recycleRobot(recyclableRobots));
@@ -24,15 +24,16 @@ export function QualityAssurance() {
 
   useEffect(() => {
     dispatch(fetchRobotsForQA());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    if (!isLoading && robots.length) {
-      robots.map((robot: Robot) => {
+    if (!isLoading && allRobots.length) {
+      allRobots.map((robot: Robot) => {
         if (isRecyclable(robot)) setShowRecycleButton(true);
+        return robot;
       });
     }
-  }, [isLoading, robots]);
+  }, [isLoading, allRobots]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -47,11 +48,7 @@ export function QualityAssurance() {
       ) : null}
 
       <div className="mt-3">
-        {robots.map((robot: Robot) => (
-          <div className="mb-3">
-            <RobotItem robot={robot} />
-          </div>
-        ))}
+        <RobotsList robots={allRobots} />
       </div>
     </>
   );

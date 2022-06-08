@@ -5,7 +5,7 @@ export enum RobotStatusEnum {
   PAINT_SCRATCHED = "paint scratched",
 }
 
-type RobotStatus =
+export type RobotStatus =
   | RobotStatusEnum.ON_FIRE
   | RobotStatusEnum.RUSTY
   | RobotStatusEnum.LOOSE_SCREWS

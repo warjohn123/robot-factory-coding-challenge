@@ -23,6 +23,30 @@
         "Colour": "red"
       },
       "statuses": ["on fire", "rusty", "loose screws"]
+    },
+    {
+      "id": 3,
+      "name": "Robot 3",
+      "configuration": {
+        "hasSentience": true,
+        "hasWheels": true,
+        "hasTracks": false,
+        "numberOfRotors": 5,
+        "Colour": "red"
+      },
+      "statuses": []
+    },
+    {
+      "id": 4,
+      "name": "Robot 4",
+      "configuration": {
+        "hasSentience": false,
+        "hasWheels": true,
+        "hasTracks": false,
+        "numberOfRotors": 5,
+        "Colour": "red"
+      },
+      "statuses": ["loose screws"]
     }
   ]
 }

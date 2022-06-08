@@ -1,46 +1,47 @@
 import { useAppSelector } from "hooks";
-import { RobotItem } from "Components/RobotItem";
-import React, { useEffect, useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Tab, Tabs } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
 import { fetchRobotsForQA } from "store/robot";
-import styles from "./shipping.module.scss";
-import { isRecyclable } from "pages/quality-assurance/helpers";
+import { RobotsList } from "Components/RobotsList";
 
 export function Shipping() {
   const dispatch = useDispatch<AppDispatch>();
-  const [showRecycleButton, setShowRecycleButton] = useState<boolean>(false);
-
-  const robots = useAppSelector((state) => state.robots.robots);
+  const factorySecondRobots = useAppSelector(
+    (state) => state.robots.factorySecondsRobots
+  );
+  const passedQARobots = useAppSelector((state) => state.robots.passedQARobots);
+  const addedToShipmentRobots = useAppSelector(
+    (state) => state.robots.addedToShipmentRobots
+  );
   const isLoading = useAppSelector((state) => state.robots.isLoading);
 
   useEffect(() => {
     dispatch(fetchRobotsForQA());
-  }, []);
-
-  useEffect(() => {
-    if (!isLoading && robots.length) {
-      robots.map((robot: Robot) => {
-        if (isRecyclable(robot)) setShowRecycleButton(true);
-      });
-    }
-  }, [isLoading, robots]);
+  }, [dispatch]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  console.log("showRecycleButton", showRecycleButton);
-
   return (
     <>
-      {showRecycleButton ? <Button>Recycle robots</Button> : null}
-      {robots.map((robot: Robot) => (
-        <div className="mb-3">
-          <RobotItem robot={robot} />
-        </div>
-      ))}
+      <Tabs
+        defaultActiveKey="factory-second"
+        id="uncontrolled-tab-example"
+        className="mb-3"
+      >
+        <Tab eventKey="factory-second" title="Factory Second">
+          <RobotsList robots={factorySecondRobots} />
+        </Tab>
+        <Tab eventKey="passed-qa" title="Passed QA">
+          <RobotsList robots={passedQARobots} />
+        </Tab>
+        <Tab eventKey="ready-to-ship" title="Ready to ship">
+          <RobotsList robots={addedToShipmentRobots} />
+        </Tab>
+      </Tabs>
     </>
   );
 }

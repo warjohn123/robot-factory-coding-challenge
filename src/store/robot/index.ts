@@ -18,10 +18,13 @@ const initialState: RobotState = {
   addedToShipmentRobots: [],
 };
 
-export const fetchRobotsForQA = createAsyncThunk("robots", async () => {
-  const robots = (await new RobotAPI().getRobots()) as Robot[];
-  return robots;
-});
+export const fetchRobotsForQA = createAsyncThunk(
+  "robots",
+  async (limit: number) => {
+    const robots = (await new RobotAPI().getRobots(limit)) as Robot[];
+    return robots;
+  }
+);
 
 export const extinguishRobot = createAsyncThunk(
   "robots-extinguish",

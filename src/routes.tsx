@@ -7,12 +7,13 @@ import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
 import { fetchRobotsForQA } from "store/robot";
+import { LIMIT } from "constants/index";
 
 export function RobotFactoryRoutes() {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchRobotsForQA());
+    dispatch(fetchRobotsForQA(LIMIT));
   }, [dispatch]);
   return (
     <BrowserRouter>

@@ -11,6 +11,7 @@ import {
   removeFromShipmentRobots,
 } from "store/robot";
 import { isRecyclable, isOnFire } from "pages/quality-assurance/helpers";
+import { LIMIT } from "constants/index";
 
 interface RobotItemProps {
   robot: Robot;
@@ -39,7 +40,7 @@ export function RobotItem({ robot }: RobotItemProps) {
 
   const extinguish = () => {
     dispatch(extinguishRobot(robot));
-    dispatch(fetchRobotsForQA());
+    dispatch(fetchRobotsForQA(LIMIT));
   };
 
   const recycle = () => {};

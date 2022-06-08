@@ -3,10 +3,12 @@ import { RobotStatusEnum } from "enums/robots";
 import { API_ROUTES } from "./APIRoutes";
 
 export class RobotAPI {
-  getRobots(): Promise<Robot[]> {
-    return Axios.get(API_ROUTES.robot).then(
-      (response) => response.data as Robot[]
-    );
+  getRobots(limit: number): Promise<Robot[]> {
+    return Axios.get(API_ROUTES.robot, {
+      params: {
+        _limit: limit,
+      },
+    }).then((response) => response.data as Robot[]);
   }
 
   extinguishRobot(robot: Robot): Promise<Robot> {

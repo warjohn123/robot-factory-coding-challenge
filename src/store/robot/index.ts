@@ -40,6 +40,13 @@ export const recycleRobot = createAsyncThunk(
   }
 );
 
+export const sendShipment = createAsyncThunk(
+  "robots-send-shipment",
+  async (robots: Robot[]) => {
+    await new RobotAPI().sendShipment(robots);
+  }
+);
+
 export const robotSlice = createSlice({
   name: "robot",
   initialState,

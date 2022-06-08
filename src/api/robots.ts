@@ -25,4 +25,10 @@ export class RobotAPI {
       recycleRobots: robots.map((robot) => robot.id),
     }).then((response) => response.data as number[]);
   }
+
+  sendShipment(robots: Robot[]): Promise<number[]> {
+    return Axios.post(API_ROUTES.sendShipment, {
+      shipmentRobots: robots.map((robot) => robot.id),
+    }).then((response) => response.data as number[]);
+  }
 }

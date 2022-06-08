@@ -9,6 +9,7 @@ import {
   fetchRobotsForQA,
   pushAddedToShipmentRobots,
   removeFromShipmentRobots,
+  sendShipment,
 } from "store/robot";
 import { isRecyclable, isOnFire } from "pages/quality-assurance/helpers";
 import { LIMIT } from "constants/index";
@@ -81,6 +82,10 @@ export function RobotItem({ robot }: RobotItemProps) {
     ) : null;
   };
 
+  const sendShipmentFunc = () => {
+    dispatch(sendShipment([robot]));
+  };
+
   const handleReadyToShip = () => {
     const passedQa = passedQARobots.find(
       (addedToShipmentRobot: Robot) => addedToShipmentRobot.id === robot.id
@@ -101,7 +106,21 @@ export function RobotItem({ robot }: RobotItemProps) {
     );
 
     return addedToShipment ? (
-      <Button onClick={removeFromShipment}>Remove from Shipment</Button>
+      <Button variant="secondary" onClick={removeFromShipment}>
+        Remove from Shipment
+      </Button>
+    ) : null;
+  };
+
+  const handleSendShipment = () => {
+    const addedToShipment = addedToShipmentRobots.find(
+      (addedToShipmentRobot: Robot) => addedToShipmentRobot.id === robot.id
+    );
+
+    return addedToShipment ? (
+      <Button variant="primary" className="ms-3" onClick={sendShipmentFunc}>
+        Send shipment
+      </Button>
     ) : null;
   };
 
@@ -115,6 +134,7 @@ export function RobotItem({ robot }: RobotItemProps) {
           {handleRecycle()}
           {handleReadyToShip()}
           {handleRemoveFromShipment()}
+          {handleSendShipment()}
         </div>
       </Card.Header>
       <Card.Body className={styles.RobotItemCardBody}>

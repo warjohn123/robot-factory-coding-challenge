@@ -1,0 +1,29 @@
+.RobotItem {
+    font-size: 14px;
+    .RobotItemCardHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        p {
+            margin: 0;
+        }
+
+        svg {
+            cursor: pointer;
+            color: red;
+        }
+    }
+
+    .RobotItemCardBody {
+
+        p {
+            margin-bottom: 4px;
+        }
+
+
+        .Status {
+            text-indent: 16px;
+        }
+    }
+}

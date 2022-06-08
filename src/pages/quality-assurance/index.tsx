@@ -1,22 +1,20 @@
 import { useAppSelector } from "hooks";
-import { RobotItem } from "pages/Components/RobotItem";
+import { RobotItem } from "Components/RobotItem";
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
-import { fetchRobots } from "store/robot";
-import { log } from "utils/log";
+import { fetchRobotsForQA } from "store/robot";
 import styles from "./robots-list.module.scss";
 
-export function RobotsList() {
+export function QualityAssurance() {
   const dispatch = useDispatch<AppDispatch>();
 
   const robots = useAppSelector((state) => state.robots.robots);
   const isLoading = useAppSelector((state) => state.robots.isLoading);
 
-  console.log("im h");
   useEffect(() => {
-    dispatch(fetchRobots());
+    dispatch(fetchRobotsForQA());
   }, []);
 
   if (isLoading) {
@@ -26,7 +24,9 @@ export function RobotsList() {
   return (
     <>
       {robots.map((robot: Robot) => (
-        <RobotItem robot={robot} />
+        <div className="mb-3">
+          <RobotItem robot={robot} />
+        </div>
       ))}
     </>
   );

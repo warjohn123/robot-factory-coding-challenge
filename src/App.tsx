@@ -1,7 +1,7 @@
 import React from "react";
-import { Router, Route, BrowserRouter, Routes } from "react-router-dom";
-import { RobotsList } from "pages/robots-list";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Axios from "axios";
+import { RobotFactoryRoutes } from "routes";
 
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
@@ -10,13 +10,7 @@ Axios.defaults.headers.common = {
 };
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<RobotsList />}></Route>
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RobotFactoryRoutes />;
 }
 
 export default App;

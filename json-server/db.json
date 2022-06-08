@@ -10,7 +10,7 @@
         "numberOfRotos": 5,
         "Colour": "red"
       },
-      "statues": ["on fire"]
+      "statuses": ["on fire"]
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
         "numberOfRotos": 5,
         "Colour": "red"
       },
-      "statues": ["on fire"]
+      "statuses": ["on fire", "rusty", "loose screws"]
     }
   ]
 }

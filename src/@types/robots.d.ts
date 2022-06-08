@@ -12,5 +12,3 @@ interface RobotConfiguration {
   numberOfRotors: BigInteger;
   Colour: string;
 }
-
-type RobotStatus = "on fire" | "rusty" | "loose screws" | "paint scratched";

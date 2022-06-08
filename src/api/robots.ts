@@ -18,9 +18,9 @@ export class RobotAPI {
     }).then((response) => response.data as Robot);
   }
 
-  recycleRobots(robotIds: number[]): Promise<number[]> {
+  recycleRobots(robots: Robot[]): Promise<number[]> {
     return Axios.post(API_ROUTES.recycle, {
-      recycleRobots: robotIds,
+      recycleRobots: robots.map((robot) => robot.id),
     }).then((response) => response.data as number[]);
   }
 }

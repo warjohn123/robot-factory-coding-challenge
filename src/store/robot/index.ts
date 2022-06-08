@@ -24,6 +24,13 @@ export const extinguishRobot = createAsyncThunk(
   }
 );
 
+export const recycleRobot = createAsyncThunk(
+  "robots-recycle",
+  async (robots: Robot[]) => {
+    await new RobotAPI().recycleRobots(robots);
+  }
+);
+
 export const robotSlice = createSlice({
   name: "robot",
   initialState,

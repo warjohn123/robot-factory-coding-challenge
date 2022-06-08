@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
-import { fetchRobotsForQA } from "store/robot";
+import { fetchRobotsForQA, recycleRobot } from "store/robot";
 import styles from "./quality-assurance.module.scss";
 import { isRecyclable } from "pages/quality-assurance/helpers";
 
@@ -15,7 +15,12 @@ export function QualityAssurance() {
   const robots = useAppSelector((state) => state.robots.robots);
   const isLoading = useAppSelector((state) => state.robots.isLoading);
 
-  const recycleRobots = () => {};
+  const recycleRobots = () => {
+    let recyclableRobots: Robot[] = robots.filter((robot) =>
+      isRecyclable(robot)
+    );
+    dispatch(recycleRobot(recyclableRobots));
+  };
 
   useEffect(() => {
     dispatch(fetchRobotsForQA());

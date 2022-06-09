@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "store";
 import { fetchRobotsForQA } from "store/robot";
 import { LIMIT } from "constants/index";
+import { ToastContainer, toast } from "react-toastify";
 
 export function RobotFactoryRoutes() {
   const dispatch = useDispatch<AppDispatch>();
@@ -32,6 +33,7 @@ export function RobotFactoryRoutes() {
           <Route path="/shipping" element={<Shipping />}></Route>
         </Routes>
       </Container>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

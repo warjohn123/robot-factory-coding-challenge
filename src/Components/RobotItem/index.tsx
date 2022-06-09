@@ -86,8 +86,9 @@ export function RobotItem({ robot }: RobotItemProps) {
     ) : null;
   };
 
-  const sendShipmentFunc = () => {
-    dispatch(sendShipment([robot]));
+  const sendShipmentFunc = async () => {
+    await dispatch(sendShipment([robot]));
+    await dispatch(fetchRobotsForQA(LIMIT));
   };
 
   const handleReadyToShip = () => {

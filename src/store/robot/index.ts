@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RobotAPI } from "api/robots";
 import { isFactorySecond, isRecyclable } from "pages/quality-assurance/helpers";
+import { toast } from "react-toastify";
+import { toastMessage } from "utils/log";
 
 interface RobotState {
   isLoading: boolean;
@@ -30,6 +32,8 @@ export const extinguishRobot = createAsyncThunk(
   "robots-extinguish",
   async (robot: Robot) => {
     await new RobotAPI().extinguishRobot(robot);
+
+    toastMessage("Robot successfully extinguished");
   }
 );
 
@@ -37,6 +41,8 @@ export const recycleRobot = createAsyncThunk(
   "robots-recycle",
   async (robots: Robot[]) => {
     await new RobotAPI().recycleRobots(robots);
+
+    toastMessage("Robot successfully recycled");
   }
 );
 
@@ -44,6 +50,8 @@ export const sendShipment = createAsyncThunk(
   "robots-send-shipment",
   async (robots: Robot[]) => {
     await new RobotAPI().sendShipment(robots);
+
+    toastMessage("Robot successfully shipped");
     return robots.map((robot) => robot.id);
   }
 );
@@ -127,6 +135,7 @@ export const robotSlice = createSlice({
         state.addedToShipmentRobots = state.addedToShipmentRobots.filter(
           (robot: Robot) => !shipmentRobots.includes(robot.id)
         );
+        toastMessage("Robot successfully shipped!");
       });
   },
 });

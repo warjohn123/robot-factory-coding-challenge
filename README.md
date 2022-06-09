@@ -1,4 +1,13 @@
-Run json-server
+Installation:
 
-- `cd json-server`
-- run `json-server --watch db.json --port 3001 --routes routes.json`
+Front-end:
+
+1. Clone the repository `robot-factory-coding-challenge` React app.
+2. `npm install`
+3. `npm start`
+
+Back-end:
+
+1. Clone the `robot-factory-be` repository here: https://github.com/warjohn123/robot-factory-be. It is an Express app that's using lowdb which is the same as being used with json-server.
+2. `npm install`
+3. `npm run start:dev`
